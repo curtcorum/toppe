@@ -21,7 +21,7 @@ sys.psd_rf_wait = 148;            % rf/gradient delay (us)
 sys.psd_grd_wait = 156;           % ADC/gradient delay (us).
 %sys.segmentDeadTime = 12;         % Dead time before start of block group, equals RUP_GRD(9us)
 sys.segmentRingdownTime = 116;    % Delay at end of block group, equals 4us + timssi. 
-sys.forbiddenEspRange = [410 510];    % (us) Forbidden echo spacings (mechanical resonance). See /usr/g/bin/epiesp.dat
+sys.forbiddenEspRange = [410 510];% (us) Forbidden echo spacings (mechanical resonance). See /usr/g/bin/epiesp.dat
 sys.tminwait   = 12;              % minimum duration of wait pulse in EPIC code (us)
 
 % Design choices (need not equal scanner limits)
@@ -33,8 +33,8 @@ sys.rfRingdownTime = 54;     % us. Must be >= 54us
 sys.adcDeadTime = 40;        % us. Must be >= 40us
 
 % The following determine the slice/echo/view indexing in the data file
-sys.maxSlice = 2048;           % max dabslice. UI won't allow more than this to be entered
-sys.maxView  = 600;
+sys.maxSlice = 2048;          % max dabslice. UI won't allow more than this to be entered
+sys.maxView  = 80000;         % was 600, is this a problem > 600?, *** CAC 240319
 sys.maxEcho  = 1;             % actual value seems to be 16, but we won't use this dimension so only allow 1 here
 
 
@@ -56,8 +56,8 @@ switch sys.gradient
     otherwise, error('Gradient coil (%s) unkown', sys.gradient);
 end
 
-if sys.maxView > 2048
-    error('maxView exceeds max value (2048)');
+if sys.maxSlice > 2048
+    error('maxSlice exceeds max value (2048)');
 end
 if sys.maxEcho > 1
     error('maxEcho exceeds max value (1)');
